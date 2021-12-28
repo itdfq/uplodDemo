@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 
 /**
  * @Author GocChin
@@ -30,26 +30,30 @@ public class UploadController {
     @Autowired
     private UploadBizService uploadBizService;
 
+    /**
+     * 上传文件
+     *
+     * @param file
+     * @return
+     */
     @PostMapping("/upload")
     public Result upload(@RequestParam(value = "file") MultipartFile file) {
-        if (file == null) {
-            return Result.newFailure("文件不能为空");
-        }
-        String type = file.getContentType();
-        String name = file.getOriginalFilename();
-        Integer size = Math.toIntExact(file.getSize());
-        log.error("size:{}", size);
-        Map<String, String> map = new HashMap<>();
-        map.put("type", type);
-        map.put("name", name);
+        return uploadBizService.saveFile(file);
+    }
 
-        map.put("size", String.valueOf(size));
-        return Result.newSuccess(map);
-
+    /**
+     * 根据Code下载
+     * @param code
+     * @return
+     */
+    @GetMapping("/downByCode")
+    public Result downByCode(@RequestParam String code, HttpServletResponse response) {
+        return uploadBizService.getFile(code,response);
     }
 
     /**
      * 通过唯一ID 获取文件信息
+     *
      * @param code
      * @return
      */

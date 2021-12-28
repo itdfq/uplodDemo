@@ -9,9 +9,9 @@ package com.itdfq.upload.constant;
  */
 public class UploadConstant {
     /**
-     * 项目地址
+     * 1MB的字节
      */
-    public static final String PROJECT_HOME = "/project/upload/data";
+    public static final double BYTE_SIZE = 1048576.00;
     /**
      * 有效
      */

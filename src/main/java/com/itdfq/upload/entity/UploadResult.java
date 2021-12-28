@@ -15,6 +15,7 @@ import java.util.Date;
  */
 @Data
 public class UploadResult implements Serializable {
+
     /**
      * 文件原名
      */
@@ -23,6 +24,7 @@ public class UploadResult implements Serializable {
      * 大小 单位：字节
      */
     private Integer size;
+
     /**
      * 类型
      */

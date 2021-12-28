@@ -30,6 +30,8 @@ server:
 #log
 logging:
   file:
-    path: /project/log
-
+    path: /project/upload/log
+upload:
+#  address: /project/upload/data
+  address: E:\java-IDEA\upload\place
 
