@@ -30,9 +30,9 @@
 
         <!--数据库连接信息-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://121.36.77.21:5019/dfq?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;verifyServerCertificate=false&amp;useSSL=false"
+                        connectionURL="jdbc:mysql://127.0.0.1:5019/dfq?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;verifyServerCertificate=false&amp;useSSL=false"
                         userId="root"
-                        password="dfq5019."/>
+                        password="root."/>
 
 
         <javaModelGenerator targetPackage="com.itdfq.upload.entity" targetProject="src/main/java"/>
