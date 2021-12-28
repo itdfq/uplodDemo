@@ -1,4 +1,4 @@
-# 应用名称
+
 spring:
   application:
     name: upload
@@ -20,14 +20,14 @@ spring:
     time-zone: GMT+8
   servlet:
     multipart:
-      max-file-size: 10MB
-      max-request-size: 100MB
+      max-file-size: 5MB
+      max-request-size: 10MB
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml
-# 应用服务 WEB 访问端口
+
 server:
   port: 8080
-#log配置
+#log
 logging:
   file:
     path: /project/log

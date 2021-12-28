@@ -3,6 +3,7 @@ package com.itdfq.upload.biz;
 import com.itdfq.upload.constant.UploadConstant;
 import com.itdfq.upload.entity.Result;
 import com.itdfq.upload.entity.Upload;
+import com.itdfq.upload.entity.UploadResult;
 import com.itdfq.upload.service.UploadService;
 import com.itdfq.upload.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,7 @@ public class UploadBizService {
 
     /**
      * 文件上传数据记录
+     *
      * @param size
      * @param name
      * @param type
@@ -47,6 +49,34 @@ public class UploadBizService {
             return Result.newFailure("上传异常");
         }
         return Result.newSuccess(code);
+
+    }
+
+    /**
+     * 根据UUId获取文件数据
+     *
+     * @param code
+     * @return
+     */
+    public Result<UploadResult> getByCode(String code) {
+        try {
+            Upload upload = uploadService.getByCode(code);
+            return Result.newSuccess(format(upload));
+        } catch (Exception e) {
+            log.error("查询异常,code:{}", code, e);
+            return Result.newFailure("查询异常");
+        }
+    }
+
+    private UploadResult format(Upload upload) {
+        UploadResult result = new UploadResult();
+        result.setAddTime(upload.getAddTime());
+        result.setCode(upload.getCode());
+        result.setName(upload.getName());
+        result.setSaveAddress(upload.getSaveAddress());
+        result.setSize(upload.getSize());
+        result.setType(upload.getType());
+        return result;
 
     }
 }

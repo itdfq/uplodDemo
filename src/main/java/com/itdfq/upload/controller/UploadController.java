@@ -2,7 +2,10 @@ package com.itdfq.upload.controller;
 
 import com.itdfq.upload.biz.UploadBizService;
 import com.itdfq.upload.entity.Result;
+import com.itdfq.upload.entity.UploadResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +24,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/itdfq")
+@Slf4j
 public class UploadController {
 
     @Autowired
@@ -34,12 +38,25 @@ public class UploadController {
         String type = file.getContentType();
         String name = file.getOriginalFilename();
         Integer size = Math.toIntExact(file.getSize());
+        log.error("size:{}", size);
         Map<String, String> map = new HashMap<>();
         map.put("type", type);
         map.put("name", name);
 
-        map.put("size",String.valueOf(size));
+        map.put("size", String.valueOf(size));
         return Result.newSuccess(map);
 
     }
+
+    /**
+     * 通过唯一ID 获取文件信息
+     * @param code
+     * @return
+     */
+    @GetMapping("/getByCode")
+    public Result<UploadResult> getByCode(@RequestParam String code) {
+        return uploadBizService.getByCode(code);
+    }
+
+
 }
