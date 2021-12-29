@@ -164,6 +164,9 @@ public class UploadBizService {
     public Result<UploadResult> getByCode(String code) {
         try {
             Upload upload = uploadService.getByCode(code);
+            if (upload == null) {
+                return Result.newFailure("文件不存在");
+            }
             return Result.newSuccess(format(upload));
         } catch (Exception e) {
             log.error("查询异常,code:{}", code, e);

@@ -1,13 +1,13 @@
-package com.itdfq.upload.entity;
+package com.itdfq.entity;
 
 import java.io.Serializable;
 
 /**
  * @Author GocChin
- * @Date 2021/12/28 20:23
+ * @Date 2021/12/29 13:42
  * @Blog: itdfq.com
  * @QQ: 909256107
- * @Description:
+ * @mark:
  */
 public class Result<T extends Object> implements Serializable {
 
@@ -80,4 +80,3 @@ public class Result<T extends Object> implements Serializable {
     }
 
 }
-

@@ -28,7 +28,7 @@ public class VisitWebInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         Long endTime = System.currentTimeMillis();
-        log.info("request方式==》请求路径为:{},请求所用时间为:{}", request.getRequestURI(), (endTime - LOCAL_THREAD.get()));
+        log.info("请求路径为:{},请求所用时间为:{}", request.getRequestURI(), (endTime - LOCAL_THREAD.get()));
     }
 
     @Override
