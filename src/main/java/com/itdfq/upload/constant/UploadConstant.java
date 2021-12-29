@@ -19,5 +19,10 @@ public class UploadConstant {
     /**
      * 分隔符
      */
-    public static String SEPARATOR = "/";
+    public static final String SEPARATOR = "/";
+
+    /**
+     * 410状态码
+     */
+    public static final int ERROR_STATE = 410;
 }

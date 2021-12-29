@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 
 /**
@@ -101,16 +103,19 @@ public class UploadBizService {
      * @param code
      * @return
      */
-    public Result getFile(String code, HttpServletResponse response) {
+    public void getFile(String code, HttpServletResponse response) throws UnsupportedEncodingException {
         Upload upload = uploadService.getByCode(code);
         if (upload == null) {
-            return Result.newFailure("文件不存在");
+            throw new RuntimeException("文件不存在");
         }
         File file = new File(upload.getSaveAddress());
         //设置文件ContentType类型
         response.setContentType("multipart/form-data");
         //设置文件头
-        response.setHeader("Content-Disposition", "attachment;fileName=" + file.getName());
+        log.info("文件名字：{}", file.getName());
+        //设置编码
+        String fileName = URLEncoder.encode(file.getName(), "UTF-8");
+        response.setHeader("Content-Disposition", "attachment;fileName=" + fileName);
         ServletOutputStream out = null;
         FileInputStream inputStream = null;
         try {
@@ -142,9 +147,9 @@ public class UploadBizService {
                 e.printStackTrace();
             }
         }
-        return Result.newSuccess();
-
     }
+
+
 
 
     /**

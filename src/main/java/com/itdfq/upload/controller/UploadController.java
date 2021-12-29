@@ -1,6 +1,7 @@
 package com.itdfq.upload.controller;
 
 import com.itdfq.upload.biz.UploadBizService;
+import com.itdfq.upload.constant.UploadConstant;
 import com.itdfq.upload.entity.Result;
 import com.itdfq.upload.entity.UploadResult;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @Author GocChin
@@ -43,13 +44,22 @@ public class UploadController {
 
     /**
      * 根据Code下载
+     *
      * @param code
      * @return
      */
     @GetMapping("/downByCode")
     public Result downByCode(@RequestParam String code, HttpServletResponse response) {
-        return uploadBizService.getFile(code,response);
+        try {
+            uploadBizService.getFile(code, response);
+            return Result.newSuccess();
+        } catch (Exception e) {
+           log.error("下载异常",e);
+           response.setStatus(UploadConstant.ERROR_STATE);
+           return Result.newFailure("下载失败");
+        }
     }
+
 
     /**
      * 通过唯一ID 获取文件信息
