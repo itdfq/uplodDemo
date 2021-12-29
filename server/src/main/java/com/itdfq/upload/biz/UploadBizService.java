@@ -45,13 +45,13 @@ public class UploadBizService {
      * @param type
      * @return
      */
-    public Result<String> insert(Integer size, String name, String type, String saveAddress) {
+    public Result<String> insert(Integer size, String name, String type, String saveAddress, Long uuid) {
         Upload upload = new Upload();
         upload.setDeletedId(UploadConstant.DELETED_ID);
         upload.setSize(size);
         upload.setName(name);
         upload.setType(type);
-        String code = String.valueOf(System.currentTimeMillis());
+        String code = String.valueOf(uuid);
         upload.setCode(code);
         upload.setAddTime(new Date());
         upload.setSaveAddress(saveAddress);
@@ -76,8 +76,9 @@ public class UploadBizService {
             return Result.newFailure("文件不能为空");
         }
         String absolutePath = null;
+        long millis = System.currentTimeMillis();
         try {
-            String address = uploadAddress + UploadConstant.SEPARATOR +
+            String address = uploadAddress + UploadConstant.SEPARATOR_1 +
                     DateUtils.getFormattedString(new Date(), DateUtils.DATE_FORMAT_1);
             // 文件保存路径
             File parent = new File(address);
@@ -85,7 +86,11 @@ public class UploadBizService {
             if (!parent.exists()) {
                 parent.mkdirs();
             }
-            File dest = new File(parent, file.getOriginalFilename());
+            int index = file.getOriginalFilename().lastIndexOf('.');
+            String name = index == -1 ? UploadConstant.EMPTY_STRING : file.getOriginalFilename().substring(0, index);
+            String type = index == -1 ? UploadConstant.EMPTY_STRING : file.getOriginalFilename().substring(index);
+            String filename = name + UploadConstant.SEPARATOR_2 + millis + type;
+            File dest = new File(parent, filename);
             absolutePath = dest.getAbsolutePath();
             // 数据传输
             file.transferTo(dest);
@@ -93,7 +98,7 @@ public class UploadBizService {
             log.error("文件转存异常", e);
             return Result.newFailure("文件上传失败");
         }
-        return insert((int) file.getSize(), file.getOriginalFilename(), file.getContentType(), absolutePath);
+        return insert((int) file.getSize(), file.getOriginalFilename(), file.getContentType(), absolutePath, millis);
 
     }
 
@@ -148,8 +153,6 @@ public class UploadBizService {
             }
         }
     }
-
-
 
 
     /**

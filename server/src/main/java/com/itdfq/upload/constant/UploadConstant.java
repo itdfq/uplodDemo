@@ -17,12 +17,21 @@ public class UploadConstant {
      */
     public static final int DELETED_ID = 0;
     /**
-     * 分隔符
+     * 分隔符/
      */
-    public static final String SEPARATOR = "/";
+    public static final String SEPARATOR_1 = "/";
 
     /**
      * 410状态码
      */
     public static final int ERROR_STATE = 410;
+
+    /**
+     * 空字符串
+     */
+    public static final String EMPTY_STRING = "";
+    /**
+     * 分隔符_
+     */
+    public static final String SEPARATOR_2 = "_";
 }

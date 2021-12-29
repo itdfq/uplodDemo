@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
 
 /**
  * @Author GocChin
@@ -49,14 +48,12 @@ public class UploadController {
      * @return
      */
     @GetMapping("/downByCode")
-    public Result downByCode(@RequestParam String code, HttpServletResponse response) {
+    public void downByCode(@RequestParam String code, HttpServletResponse response) {
         try {
             uploadBizService.getFile(code, response);
-            return Result.newSuccess();
         } catch (Exception e) {
-           log.error("下载异常",e);
-           response.setStatus(UploadConstant.ERROR_STATE);
-           return Result.newFailure("下载失败");
+            log.error("下载异常", e);
+            response.setStatus(UploadConstant.ERROR_STATE);
         }
     }
 

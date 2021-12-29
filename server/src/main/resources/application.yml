@@ -1,12 +1,11 @@
-
 spring:
   application:
     name: upload
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://121.36.77.21:5019/dfq?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://121.36.77.21:3306/dfq?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
     username: root
-    password: dfq5019.
+    password: root.
     hikari:
       minimum-idle: 5
       maximum-pool-size: 100
@@ -30,8 +29,9 @@ server:
 #log
 logging:
   file:
-    path: /project/upload/log
+    #    path: /project/upload/log
+    path: ./log
 upload:
-#  address: /project/upload/data
+  #  address: /project/upload/data
   address: E:\java-IDEA\upload\place
 

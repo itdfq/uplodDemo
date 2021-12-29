@@ -13,7 +13,7 @@ public class Result<T extends Object> implements Serializable {
 
     private static final long serialVersionUID = -9147616776579758668L;
     private static final int SUCCESS_CODE = 10000;
-    private static final int FAIL_CODE = 410;
+    private static final int FAIL_CODE = 9999;
 
     private int code;
     private String msg;
