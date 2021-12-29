@@ -37,7 +37,7 @@ CREATE TABLE `upload` (
 	```
 
 4. 日志输出，docker挂载主机目录，按天数输出，过滤error
-5. 在线地址：需要添加请求URl
+5. 在线地址：[在线地址](http://121.36.77.21:8082/itdfq/)
 
 ## 服务端
 #### 文件上传：/itdfq/upload  POST
